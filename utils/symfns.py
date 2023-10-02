@@ -14,7 +14,7 @@ def find_coefficients(expr, terms):
   return coefs
 
 
-def discretize_crank_nicolson(model_expr, V, dV, Vx, Vxx, rowtype='normal'):
+def discretize_crank_nicolson(model_expr, V, dV, Vx, Vxx, dx, rowtype='normal'):
   """Substitute V, Vx, Vxx by Crank Nicolson discretization."""
 
   # Define the gridpoints
