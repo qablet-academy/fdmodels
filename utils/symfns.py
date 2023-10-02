@@ -1,3 +1,5 @@
+from sympy import symbols
+
 def find_coefficients(expr, terms):
   """For each of the terms, find its coefficient in expr,
   by setting all other terms to zero."""
