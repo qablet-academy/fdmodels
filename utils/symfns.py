@@ -15,11 +15,15 @@ def find_coefficients(expr, terms):
 
 
 def discretize_crank_nicolson(model_expr, V, dV, Vx, Vxx, dx, rowtype='normal'):
-  """Substitute V, Vx, Vxx by Crank Nicolson discretization."""
+  """Argument model_expr is a sympy expression for a contract price in terms of V, dV, Vx, Vxx, and dx.
+  This method returns an expression where V and its derivatives are substited by the following gridpoints
+  using Crank Nicolson discretization.
+
+  - Vu_l, Vm_l, Vd_l are the upper, middle and lower gridpoints on the left hand side.
+  - Vu_r, Vm_r, Vd_r are the corresponding gridpoints on the right hand side.
+  """
 
   # Define the gridpoints
-  # Vu_l, Vm_l, Vd_l are the upper, middle and lower gridpoints on the left hand side.
-  # and Vu_r, Vm_r, Vd_r are the corresponding gridpoints on the right hand side. 
   Vu_l, Vm_l, Vd_l, Vu_r, Vm_r, Vd_r = symbols("V^u_l V^m_l, V^d_l, V^u_r, V^m_r, V^d_r")
 
   # Substitute V, dV 
@@ -33,7 +37,7 @@ def discretize_crank_nicolson(model_expr, V, dV, Vx, Vxx, dx, rowtype='normal'):
   if rowtype == "dn":  # There is no Vd at lower boundary
       expr = expr.subs(Vx, ((Vu_l - Vm_l)/2 + (Vu_r - Vm_r)/2)/(dx))
       expr = expr.subs(Vxx, 0)
-  else:  # normal case
+  else:  # everywhere else
       expr = expr.subs(Vx, ((Vu_l - Vd_l)/2 + (Vu_r - Vd_r)/2)/(2 * dx))
       expr = expr.subs(Vxx, ((Vu_l + Vd_l - 2*Vm_l) + (Vu_r + Vd_r - 2 * Vm_r))/(2 * dx ** 2))
 
