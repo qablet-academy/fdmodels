@@ -16,4 +16,4 @@ We can substitute $V$, $dV$, $V_x$, and $V_{xx}$ in the above PDE, by the discre
 
 ![cn method image](./Crank-Nicolson-Method/assets/cn.png)
 
-See `discretize_crank_nicolson` in `utils/symfns.py` for the implementation of this discretization. Each notebook uses this utility to determine the CN coefficients in each timestep from the model parameters.
+See `discretize_crank_nicolson` in [symfns.py](./Crank-Nicolson-Method/utils/symfns.py) for the implementation of this discretization. Each notebook uses this utility to determine the CN coefficients in each timestep from the model parameters.
